@@ -1,0 +1,50 @@
+<!--pages/topicdetail/topicdetail.wxml-->
+<import src="/towxml/entry.wxml" />
+<view class='container'>
+  <view class="topic-list-head">
+    <image class="topic-user-avatar" src="{{topic.author.avatar_url}}" background-size="cover"></image>
+    <view class='topic-user-loginname'>
+      <view>{{topic.author.loginname}}
+        <text>{{topic.tab}}</text>
+      </view>
+      <view>{{topic.create_at}}</view>
+    </view>
+    <view class='topic-user-icon'>
+      <view wx:if='{{topic.good}}' class='topic-user-good'>
+        精
+      </view>
+      <view wx:if='{{topic.top}}' class='topic-user-top'>
+        顶
+      </view>
+    </view>
+  </view>
+  <view class='page-section'>
+    <view class='topic-user-title'>{{topic.title}}</view>
+  </view>
+  <template is="entry" data="{{...content}}" />
+  <view>
+    <view class="weui-cells__title">最近评论</view>
+    <view style='padding:0 20rpx;' wx:if="{{isLogin}}">
+      <textarea style="height: 6em;background:#fff;width:100%;" />
+      <view style='color:#80d0c7'>提交</view>
+    </view>
+  </view>
+  <view wx:for="{{replies}}" wx:for-index="idx" wx:for-item="reply" class="reply-wrap">
+    <view class="topic-list-head">
+      <image class="topic-user-avatar" src="{{reply.author.avatar_url}}" background-size="cover"></image>
+      <view class='topic-user-loginname'>
+        <view>
+          {{reply.author.loginname}}
+          <view>{{idx + 1}}楼</view>
+        </view>
+      </view>
+      <view class='topic-user-icon'>
+        <image class="topic-user-icon-up" src=""></image>
+        <text>{{reply.ups.length}}</text>
+      </view>
+    </view>
+    <view>
+      <template is="entry" data="{{...reply.content}}" />
+    </view>
+  </view>
+</view>

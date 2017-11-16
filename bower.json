@@ -1,0 +1,21 @@
+{
+  "name": "cnode-wechat",
+  "homepage": "https://github.com/kukuyuhai/cnode-wechat-test",
+  "authors": [
+    "kukuyuhai <904684767@qq.com>"
+  ],
+  "description": "",
+  "main": "app.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "timeago.js": "^3.0.0"
+  }
+}

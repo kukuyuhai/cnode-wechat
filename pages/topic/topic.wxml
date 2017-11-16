@@ -1,0 +1,55 @@
+<view class='container'>
+  <view class='swiper-tab'>
+    <view class="swiper-tab-list {{currentTab == 0 ? 'current' : ''}}" data-current='0' id="tapTest" data-hi="WeChat" bindtap='bindSwitchTab'>全部</view>
+    <!-- <view class="swiper-tab-list {{currentTab == 4 ? 'current' : ''}}" data-current='4' data-tab = 'good' bindtap='bindSwitchTab'>精华</view> -->
+    <view class="swiper-tab-list {{currentTab == 1 ? 'current' : ''}}" data-current='1' id='share' bindtap='bindSwitchTab'>分享</view>
+    <view class="swiper-tab-list {{currentTab == 2 ? 'current' : ''}}" data-current='2' id='ask' bindtap='bindSwitchTab'>问答</view>
+    <view class="swiper-tab-list {{currentTab == 3 ? 'current' : ''}}" data-current='3' id='job' bindtap='bindSwitchTab'>招聘</view>
+  </view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winWidth -50}}px" bindchange="bindTabChange">
+    <block wx:for="{{4}}">
+      <swiper-item>
+        <scroll-view scroll-y style='height:{{winWidth - 50}}px;' scroll-top="{{scrollTop}}" bindscrolltolower='lower'>
+          <block wx:for="{{topics}}" wx:for-item="item">
+            <navigator class='navigator-list' open-type='navigate' url='/pages/topicdetail/topicdetail?id={{item.id}}'>
+              <view class="topic-list-head">
+                <image class="topic-user-avatar" src="{{item.author.avatar_url}}" background-size="cover"></image>
+                <view class='topic-user-loginname'>
+                  <view>{{item.author.loginname}}
+                    <text style='color:#80d0c7'>#{{item.tag}}#</text>
+                  </view>
+                  <view>{{item.create_at}}</view>
+                </view>
+                <view class='topic-user-icon'>
+                  <view wx:if='{{item.good}}' class='topic-user-good'>
+                    精
+                  </view>
+                  <view wx:if='{{item.top}}' class='topic-user-top'>
+                    顶
+                  </view>
+                </view>
+                <view class="">
+                  <image class="icon_24" src='/images/star.png'></image>
+                </view>
+              </view>
+              <view class='topic-user-title'>{{item.title}}</view>
+              <view class="topic-user-count">
+                <view class='topic-user-count-item'>
+                  <image class='icon_14' src="/images/send.png" background-size="cover"></image>
+                  {{item.visit_count}}
+                </view>
+                <view class='topic-user-count-item'>
+                  <image class='icon_14' src="/images/message.png" background-size="cover"></image>
+                  {{item.reply_count}}
+                </view>
+                <view class='topic-user-count-item'>
+                  {{item.last_reply_at}}
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </scroll-view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

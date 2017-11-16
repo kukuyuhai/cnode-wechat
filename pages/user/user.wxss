@@ -1,0 +1,39 @@
+/* pages/user/user.wxss */
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(#13547A,#80d0c7);
+  padding: 20px 0;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background: #FFF;
+}
+
+.userinfo-nickname {
+  color: #eee;
+  font-weight: 500;
+}
+
+.userinfo-score{
+  color: #fff;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.more{
+  font-size: 14px; 
+  color: #80d0c7;
+}
+.text_topic{
+  margin: 0 30rpx;
+  color: #999;
+  font-size: 14px;
+}

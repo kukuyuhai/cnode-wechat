@@ -1,0 +1,66 @@
+<!--pages/user/user.wxml-->
+<view class="container">
+  <block wx:if="{{isLogin}}">
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{userinfo.avatar_url}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userinfo.loginname}}</text>
+      <text class="userinfo-nickname">积分：<text class='userinfo-score'>{{userinfo.score}}</text></text>
+    </view>
+    <view class='usermessage'>
+      <view class='reply_message'>
+        <view class="page-section">
+          <view class="weui-cells__title">最近话题</view>
+          <block wx:if="{{recent_topics.length > 0}}">
+            <block wx:for="{{recent_topics}}" wx:for-item="topic">
+              <navigator url="" class="navigator">
+                <view class="navigator-text">{{topic.title}}</view>
+                <view class="navigator-arrow"></view>
+              </navigator>
+            </block>
+            <navigator url="" class='navigator'>
+              <view class="more">更多</view>
+            </navigator>
+          </block>
+          <block wx:else>
+            <view class='text_topic'>暂时没有回复的帖子</view>
+          </block>
+        </view>
+      </view>
+      <view class='topic_message'>
+        <view class="page-section">
+          <view class="weui-cells__title">最近回复</view>
+          <block wx:if="{{recent_replies.length > 0}}">
+            <block wx:for="{{recent_replies}}" wx:for-item="reply">
+              <navigator url="" class="navigator">
+                <view class="navigator-text">{{reply.title}}</view>
+                <view class="navigator-arrow"></view>
+              </navigator>
+            </block>
+            <navigator url="" class='navigator'>
+              <view class="more">更多</view>
+            </navigator>
+          </block>
+          <block wx:else>
+            <view class='text_topic'>暂时没有回复的帖子</view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <form bindsubmit="onLoginSubmit">
+      <view class="page-section">
+        <view class="weui-cells__title">AccessToken</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input" name="accesstoken" placeholder="请输入AccessToken" />
+          </view>
+        </view>
+      </view>
+      <view class="btn-area">
+        <button formType="submit" type='primary' plain='true'>登录</button>
+        <button bindtap='onTapToScan' type='primary'>扫一扫登录</button>
+      </view>
+    </form>
+  </block>
+</view>
