@@ -7,10 +7,10 @@
     <view class="swiper-tab-list {{currentTab == 3 ? 'current' : ''}}" data-current='3' id='job' bindtap='bindSwitchTab'>招聘</view>
   </view>
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winWidth -50}}px" bindchange="bindTabChange">
-    <block wx:for="{{4}}">
+    <block wx:for="{{4}}" wx:key="">
       <swiper-item>
         <scroll-view scroll-y style='height:{{winWidth - 50}}px;' scroll-top="{{scrollTop}}" bindscrolltolower='lower'>
-          <block wx:for="{{topics}}" wx:for-item="item">
+          <block wx:for="{{topics}}" wx:for-item="item" wx:key="">
             <navigator class='navigator-list' open-type='navigate' url='/pages/topicdetail/topicdetail?id={{item.id}}'>
               <view class="topic-list-head">
                 <image class="topic-user-avatar" src="{{item.author.avatar_url}}" background-size="cover"></image>
@@ -27,9 +27,6 @@
                   <view wx:if='{{item.top}}' class='topic-user-top'>
                     顶
                   </view>
-                </view>
-                <view class="">
-                  <image class="icon_24" src='/images/star.png'></image>
                 </view>
               </view>
               <view class='topic-user-title'>{{item.title}}</view>

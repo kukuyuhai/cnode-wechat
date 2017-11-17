@@ -5,16 +5,21 @@
     <image class="topic-user-avatar" src="{{topic.author.avatar_url}}" background-size="cover"></image>
     <view class='topic-user-loginname'>
       <view>{{topic.author.loginname}}
-        <text>{{topic.tab}}</text>
+        <text style='color:#80d0c7'>#{{topic.tab}}#</text>
       </view>
       <view>{{topic.create_at}}</view>
     </view>
     <view class='topic-user-icon'>
-      <view wx:if='{{topic.good}}' class='topic-user-good'>
-        精
+      <view class="topic-user-per">
+        <view wx:if='{{topic.good}}' class='topic-user-good'>
+          精
+        </view>
+        <view wx:if='{{topic.top}}' class='topic-user-top'>
+          顶
+        </view>
       </view>
-      <view wx:if='{{topic.top}}' class='topic-user-top'>
-        顶
+      <view class="topic-user-star" bindtap='onTapStar'>
+        <image class="icon_24" src='{{star}}'></image>
       </view>
     </view>
   </view>
@@ -29,7 +34,7 @@
       <view style='color:#80d0c7'>提交</view>
     </view>
   </view>
-  <view wx:for="{{replies}}" wx:for-index="idx" wx:for-item="reply" class="reply-wrap">
+  <view wx:for="{{replies}}" wx:for-index="idx" wx:for-item="reply" class="reply-wrap" wx:key="">
     <view class="topic-list-head">
       <image class="topic-user-avatar" src="{{reply.author.avatar_url}}" background-size="cover"></image>
       <view class='topic-user-loginname'>

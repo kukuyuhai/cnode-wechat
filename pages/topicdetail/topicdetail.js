@@ -9,7 +9,8 @@ Page({
   data: {
     content: {},
     replies: [],
-    isLogin: false
+    isLogin: false,
+    star:'/images/star.png'
   },
 
   /**
@@ -49,11 +50,22 @@ Page({
     })
     //
     console.log(options.id);
+  }, 
+  getTag: function (tabname) {
+    var tag = '';
+    if (tabname == 'share') tag = '分享';
+    if (tabname == 'ask') tag = '问答';
+    if (tabname == 'job') tag = '招聘';
+    return tag;
   },
   formatTimeAgo:function(topic){
+    topic.tab = this.getTag(topic.tab);
     topic.create_at = util.formatTimeAgo(topic.create_at);
     topic.last_reply_at = util.formatTimeAgo(topic.last_reply_at);
     return topic;
+  },
+  onTapStar:function(e){
+    console.log(e)
   },
   /**
    * 用户点击右上角分享
