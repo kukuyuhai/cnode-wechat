@@ -1,0 +1,42 @@
+<view wx:if="{{collect.length > 0}}">
+  <block wx:for="{{collect}}" wx:for-item="item" wx:key="">
+    <navigator class='navigator-list' open-type='navigate' url='/pages/topicdetail/topicdetail?id={{item.id}}'>
+      <view class="topic-list-head">
+        <image class="topic-user-avatar" src="{{item.author.avatar_url}}" background-size="cover"></image>
+        <view class='topic-user-loginname'>
+          <view>{{item.author.loginname}}
+            <text style='color:#80d0c7'>#{{item.tag}}#</text>
+          </view>
+          <view>{{item.create_at}}</view>
+        </view>
+        <view class='topic-user-icon'>
+          <view wx:if='{{item.good}}' class='topic-user-good'>
+            精
+          </view>
+          <view wx:if='{{item.top}}' class='topic-user-top'>
+            顶
+          </view>
+        </view>
+      </view>
+      <view class='topic-user-title'>{{item.title}}</view>
+      <view class="topic-user-count">
+        <view class='topic-user-count-item'>
+          <image class='icon_14' src="/images/send.png" background-size="cover"></image>
+          {{item.visit_count}}
+        </view>
+        <view class='topic-user-count-item'>
+          <image class='icon_14' src="/images/message.png" background-size="cover"></image>
+          {{item.reply_count}}
+        </view>
+        <view class='topic-user-count-item'>
+          {{item.last_reply_at}}
+        </view>
+      </view>
+    </navigator>
+  </block>
+</view>
+<view wx:else class='collect_no'>
+  <view class='collect_no_content'>
+    暂无收藏
+  </view>
+</view>

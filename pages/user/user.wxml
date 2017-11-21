@@ -11,7 +11,7 @@
         <view class="page-section">
           <view class="weui-cells__title">最近话题</view>
           <block wx:if="{{recent_topics.length > 0}}">
-            <block wx:for="{{recent_topics}}" wx:for-item="topic">
+            <block wx:for="{{recent_topics}}" wx:for-item="topic" wx:key="">
               <navigator url="" class="navigator">
                 <view class="navigator-text">{{topic.title}}</view>
                 <view class="navigator-arrow"></view>
@@ -30,7 +30,7 @@
         <view class="page-section">
           <view class="weui-cells__title">最近回复</view>
           <block wx:if="{{recent_replies.length > 0}}">
-            <block wx:for="{{recent_replies}}" wx:for-item="reply">
+            <block wx:for="{{recent_replies}}" wx:for-item="reply" wx:key="">
               <navigator url="" class="navigator">
                 <view class="navigator-text">{{reply.title}}</view>
                 <view class="navigator-arrow"></view>

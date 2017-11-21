@@ -1,5 +1,6 @@
 // pages/user/user.js
 const util = require("../../utils/util.js")
+const app = getApp()
 Page({
 
   /**
@@ -26,6 +27,7 @@ Page({
       method: 'POST',
       success: function (res) {
         if (res.data.success) {
+          // app.globalData.accessToken = accesstoken
           wx.setStorageSync('accessToken', accesstoken);
           wx.setStorageSync('loginname', res.data.loginname);
           util.loginRequest(res.data.loginname, function (res) {
@@ -58,6 +60,8 @@ Page({
   onTapToScan:function (){
     wx.scanCode({
       success: (res) => {
+        // app.globalData.accessToken = res.result;
+        // console.log(app.globalData.accessToken)
         wx.setStorageSync('accessToken', res.result);
         var that = this;
         wx.request({

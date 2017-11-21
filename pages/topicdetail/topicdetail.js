@@ -10,7 +10,8 @@ Page({
     content: {},
     replies: [],
     isLogin: false,
-    star:'/images/star.png'
+    isLoading:false,
+    is_collect:false,
   },
 
   /**
@@ -19,6 +20,9 @@ Page({
   onLoad: function (options) {
     const accessT = wx.getStorageSync('accessToken');
     var that = this;
+    that.setData({
+      topic_id:options.id
+    })
     wx.showLoading({
       title: '加载中',
     })
@@ -30,6 +34,7 @@ Page({
       },
       success: res => {
         const topic = res.data.data;
+        console.log(topic)
         let data = app.towxml.toJson(topic.content, 'markdown');
         //设置文档显示主题，默认'light'
         data.theme = 'light';
@@ -42,15 +47,20 @@ Page({
         //设置数据
         that.setData({
           topic: this.formatTimeAgo(topic),
-          content:data,
-          replies: topic.replies
+          content: data,
+          replies: topic.replies,
+          isLoading:true,
+          is_collect:topic.is_collect
         });
+        wx.setNavigationBarTitle({
+          title: that.data.topic.title,
+        })
         wx.hideLoading();
       }
     })
     //
     console.log(options.id);
-  }, 
+  },
   getTag: function (tabname) {
     var tag = '';
     if (tabname == 'share') tag = '分享';
@@ -58,14 +68,59 @@ Page({
     if (tabname == 'job') tag = '招聘';
     return tag;
   },
-  formatTimeAgo:function(topic){
+  formatTimeAgo: function (topic) {
     topic.tab = this.getTag(topic.tab);
     topic.create_at = util.formatTimeAgo(topic.create_at);
     topic.last_reply_at = util.formatTimeAgo(topic.last_reply_at);
     return topic;
   },
-  onTapStar:function(e){
-    console.log(e)
+  onTapStar: function (e) {
+    const accesstoken = wx.getStorageSync('accessToken');
+    var that = this;
+    if (that.data.is_collect){
+      if (accesstoken) {
+        wx.request({
+          url: util.apiurl() + '/topic_collect/de_collect',
+          method: 'POST',
+          data: {
+            accesstoken: accesstoken,
+            topic_id: that.data.topic_id
+          },
+          success: function (res) {
+            wx.showToast({
+              title: '取消收藏成功',
+              icon: 'success'
+            })
+            that.setData({
+              is_collect: false
+            })
+          }
+        })
+      }
+    }else{
+      if (accesstoken) {
+        wx.request({
+          url: util.apiurl() + '/topic_collect/collect',
+          method: 'POST',
+          data: {
+            accesstoken: accesstoken,
+            topic_id: that.data.topic_id
+          },
+          success: function (res) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success'
+            })
+            that.setData({
+              is_collect: true
+            })
+          }
+        })
+      }
+    }
+    
+    
+
   },
   /**
    * 用户点击右上角分享

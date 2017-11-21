@@ -1,0 +1,15 @@
+/* pages/collect/collect.wxss */
+
+.collect_no {
+  display: flex;
+  min-height: 100vh;
+  text-align: center;
+  color: #999;
+}
+
+.collect_no_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

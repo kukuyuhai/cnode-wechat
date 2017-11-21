@@ -1,6 +1,6 @@
 <!--pages/topicdetail/topicdetail.wxml-->
 <import src="/towxml/entry.wxml" />
-<view class='container'>
+<view class='container' wx:if="{{isLoading}}">
   <view class="topic-list-head">
     <image class="topic-user-avatar" src="{{topic.author.avatar_url}}" background-size="cover"></image>
     <view class='topic-user-loginname'>
@@ -19,7 +19,7 @@
         </view>
       </view>
       <view class="topic-user-star" bindtap='onTapStar'>
-        <image class="icon_24" src='{{star}}'></image>
+        <image class="icon_24" src="{{is_collect ? '/images/star-fill.png' : '/images/star.png'}}"></image>
       </view>
     </view>
   </view>

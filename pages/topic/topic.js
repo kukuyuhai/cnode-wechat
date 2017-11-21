@@ -1,4 +1,5 @@
 const util = require("../../utils/util.js");
+const app = getApp();
 Page({
 
   /**
@@ -33,6 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData );
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -85,7 +87,7 @@ Page({
       },
       success: function (res) {
         const json = res.data;
-        console.log(res);
+        // console.log(res);
         if (json.success) {
           that.setData({
             topics: that.formatTime(json.data),
